@@ -1,5 +1,20 @@
 import cv2
 import os
+import mysql.connector
+
+# Connexion à la base de données MySQL
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="storeos"
+)
+
+if mydb:
+    print('Connect')
+# Création de l'objet de curseur pour exécuter des requêtes SQL
+mycursor = mydb.cursor()
+
 
 cap = cv2.VideoCapture(0)
 
