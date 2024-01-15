@@ -10,15 +10,18 @@ mydb = mysql.connector.connect(
     user="root",
     password="",
     database="test",
-    connect_timeout=120  # Set a higher timeout value (in seconds)
+    # connect_timeout=120  # Set a higher timeout value (in seconds)
 )
 
 try:
     if mydb.is_connected():
         print('Connecting to MySQL')
 
+
     # Création de l'objet de curseur pour exécuter des requêtes SQL
     mycursor = mydb.cursor()
+
+    # mycursor.execute('SET GLOBAL max_allowed_packet=67108864')
 
     folderPath = 'Images'
     pathList = os.listdir(folderPath)
@@ -41,7 +44,7 @@ try:
         imgList.append(img)
         studentIds.append(student_id)
 
-    print(studentIds)
+    # print(studentIds)
 
     # Fonction pour trouver les encodages
     def findEncodings(imagesList):
@@ -49,6 +52,7 @@ try:
         for img in imagesList:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             face_encodings = face_recognition.face_encodings(img)
+            print ('face_encodings ', face_encodings)
             
             # Check if any faces are detected
             if face_encodings:

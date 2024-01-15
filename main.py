@@ -12,7 +12,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",
-    database="test"
+    database="managementofstudentabsences"
 )
 
 # Création de l'objet de curseur pour exécuter des requêtes SQL
@@ -36,6 +36,10 @@ file = open('EncodeFile.p', 'rb')
 encodeListKnownWithIds = pickle.load(file)
 file.close()
 encodeListKnown, studentIds = encodeListKnownWithIds
+
+# print("encodeListKnownWithIds : ",encodeListKnownWithIds)
+# print("encodeListKnown : ",encodeListKnown)
+# print("studentIds : ",studentIds)
 print("Encode File Loaded")
 
 modeType = 0
@@ -84,13 +88,21 @@ while True:
                 studentInfo = mycursor.fetchone()
 
                 # Update attendance 
-                datetimeObject = studentInfo[8]  # Assuming 'last_attendance_time' is the 8th column
+                datetimeObject = studentInfo[6]  # Assuming 'last_attendance_time' is the 8th column
                 secondElapsed = (datetime.now() - datetimeObject).total_seconds()
                 print(secondElapsed)
 
                 if secondElapsed > 30:
-                    sql = f"UPDATE Students SET total_attendance = total_attendance + 1, last_attendance_time = '{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}' WHERE student_id = '{id}'"
-                    mycursor.execute(sql)
+                    sql_Update = f"UPDATE Students SET total_attendance = total_attendance + 1, last_attendance_time = '{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}' WHERE student_id = '{id}'"
+                    mycursor.execute(sql_Update)
+                    # Calculer le numéro de semaine
+                    week_number = datetime.now().strftime('%U')
+                    # Jour de la semaine (lundi = 0, dimanche = 6)
+                    day_of_week = datetime.now().weekday() + 1
+
+                    sql_insert_attendance = "INSERT INTO AttendanceRecords (student_id, class_id, date_time, week_number, day_of_week, present) VALUES (%s, %s, %s, %s, %s, %s)"
+                    values = (id, studentInfo[3], datetime.now(), week_number, day_of_week, 1)
+                    mycursor.execute(sql_insert_attendance, values)
                     mydb.commit()
                 else:
                     modeType = 3
@@ -105,20 +117,21 @@ while True:
                 if counter <= 10:
                     cv2.putText(imgBackground, str(studentInfo[5]), (861, 125),
                                 cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
-                    cv2.putText(imgBackground, str(studentInfo[2]), (1006, 550),
+                    cv2.putText(imgBackground, str(studentInfo[1]), (1006, 550),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
                     cv2.putText(imgBackground, str(id), (1006, 493),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
-                    cv2.putText(imgBackground, str(studentInfo[4]), (910, 625),
+                    cv2.putText(imgBackground, str(studentInfo[3]), (910, 625),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
                     cv2.putText(imgBackground, str(studentInfo[6]), (1025, 625),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
-                    cv2.putText(imgBackground, str(studentInfo[3]), (1125, 625),
+                    cv2.putText(imgBackground, str(studentInfo[4]), (1125, 625),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
                     (w, h), _ = cv2.getTextSize(studentInfo[1], cv2.FONT_HERSHEY_COMPLEX, 1, 1)
                     offset = (414-w)//2
-                    cv2.putText(imgBackground, str(studentInfo[1]), (808+offset, 445),
+                    cv2.putText(imgBackground, str(studentInfo[2]), (808+offset, 445),
                                 cv2.FONT_HERSHEY_COMPLEX, 1, (50, 50, 50, 1))
+
                     
                     # Load student image from database
                     sql_image = f"SELECT * FROM StudentsImages WHERE student_id = '{id}'"
