@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.navigation {
+    ul {
+        li {
+            @apply flex items-center space-x-2;
+            
+            &:hover {
+                @apply bg-white rounded-l-xl text-gray-800;
+            }
+        }
+    }
+}
+
+.hovered {
+    @apply flex items-center space-x-2 bg-white rounded-l-xl text-gray-800;
+    
+    &:hover {
+        @apply bg-white rounded-l-xl text-gray-800;
+    }
+}

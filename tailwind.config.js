@@ -2,7 +2,10 @@
 module.exports = {
   content: ["./dist/**/*.{html,js,php}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: ['hover'],
+      textColor: ['hover'],
+    },
   },
   plugins: [],
 }
