@@ -4,5 +4,8 @@
   },
   "scripts": {
     "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3"
   }
 }
