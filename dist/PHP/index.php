@@ -37,7 +37,7 @@
 
 
                 <li class="mb-2 item">
-                    <a href="#" class="">
+                    <a href="students.php" class="">
                         <span class="icon">
                             <ion-icon name="school-outline"></ion-icon>
                         </span>
