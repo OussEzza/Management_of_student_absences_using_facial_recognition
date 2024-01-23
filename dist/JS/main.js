@@ -1,5 +1,5 @@
 // add hovered class to selected list item
-let list = document.querySelectorAll(".navigation li");
+let list = document.querySelectorAll(".navigation li.item");
 
 function activeLink() {
     list.forEach((item) => {
@@ -18,4 +18,10 @@ let main = document.querySelector(".main");
 toggle.onclick = function () {
     navigation.classList.toggle("active");
     main.classList.toggle("active");
+    let title = document.getElementsByClassName("title");
+    // console.log(title);
+    for(var ele of title){
+        (ele.style.display === "none") ? ele.style.display = "inline-block" : ele.style.display = "none";
+        // ele.style.display= "none";
+    }   
 };

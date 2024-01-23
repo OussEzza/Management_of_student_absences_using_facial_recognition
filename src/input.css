@@ -1,26 +1,48 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-.navigation {
+/* .navigation {
     ul {
         li {
-            @apply flex items-center space-x-2;
-            
-            &:hover {
-                @apply bg-white rounded-l-xl text-gray-800;
-            }
+        @apply flex items-center space-x-2;
+
+        &:hover {
+            @apply bg-white rounded-l-3xl;
+        }
         }
     }
+} */
+
+.item{
+    @apply flex items-center space-x-2;
+}
+.item:hover{
+    @apply bg-white rounded-l-3xl;
+}
+.item a:hover{
+    @apply text-gray-800;
 }
 
-.hovered {
-    @apply flex items-center space-x-2 bg-white rounded-l-xl text-gray-800;
-    
-    &:hover {
-        @apply bg-white rounded-l-xl text-gray-800;
+/* .navigation {
+    ul {
+        li {
+        a {
+            &:hover {
+                @apply text-gray-800;
+            }
+        }
+        }
     }
+} */
+.hovered {
+  @apply flex items-center space-x-2 bg-white rounded-l-xl text-gray-800;
+
+  &:hover {
+    @apply bg-white rounded-l-xl text-gray-800;
+  }
 }
+
+
