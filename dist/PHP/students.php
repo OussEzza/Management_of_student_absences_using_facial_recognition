@@ -149,7 +149,7 @@ session_start();
                                 <td class="px-6 py-4">' . $row['Major'] . '</td>
                                 <td class="px-6 py-4">' . $row['total_attendance'] . '</td>
                                 <td class="px-6 py-4">
-                                    <a href="edit_student.php?id=' . $row['student_id'] . '" class="font-medium text-white hover:underline" >Edit</a> | <a href="delete_student.php?id=' . $row['student_id'] . '" class="font-medium text-red-500 hover:underline">Delete</a>
+                                    <a href="edit_student.php?id=' . $row['student_id'] . '" class="font-medium text-green-500 hover:underline" >Edit</a> | <a href="delete_student.php?id=' . $row['student_id'] . '" class="font-medium text-red-500 hover:underline">Delete</a>
                                 </td>
                                 </tr>';
                             }
