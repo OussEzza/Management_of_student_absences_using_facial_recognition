@@ -10,11 +10,14 @@ session_start();
     <link rel="stylesheet" href="../output.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Students</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
-    <div class="main-container flex h-screen">
 
+    <div class="main-container flex h-screen">
         <div class="navigation bg-gray-800 text-white w-64 pl-4 pt-4 pb-4 text-xl">
             <ul>
                 <li class="mb-2">
@@ -112,7 +115,7 @@ session_start();
             // Affiche la liste des étudiants
             if ($result->num_rows > 0) {
             ?>
-                <div class='flex items-start justify-center p-4'>
+                <div class='flex items-start justify-center p-4 mb-32'>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-4/5">
                         <table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
                             <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
@@ -160,10 +163,9 @@ session_start();
                         } else {
                             echo "<p>No students found.</p>";
                         }
-                        $conn->close();
                             ?>
-                    </div>
-                </div>
+                            
+
                 <script>
                     function handleBoxClick(boxType) {
                         alert("Clicked on " + boxType);
