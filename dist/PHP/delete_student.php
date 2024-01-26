@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $studentId = $_GET['id'];
 
     // Supprime l'étudiant de la base de données
-    $deleteQuery = "DELETE FROM students WHERE id = $studentId";
+    $deleteQuery = "DELETE FROM students WHERE student_id = $studentId";
     $conn->query($deleteQuery);
 
     // Redirige vers la liste des étudiants après la suppression

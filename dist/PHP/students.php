@@ -16,98 +16,18 @@ session_start();
 </head>
 
 <body>
-
-    <div class="main-container flex h-screen">
-        <div class="navigation bg-gray-800 text-white w-64 pl-4 pt-4 pb-4 text-xl">
-            <ul>
-                <li class="mb-2">
-                    <a href="#" class="flex space-x-2 mb-8">
-                        <span class="icon">
-                            <ion-icon name="logo-microsoft"></ion-icon>
-                        </span>
-                        <span class="title">OS Brand</span>
-                    </a>
-                </li>
-
-
-                <li class="mb-2 item">
-                    <a href="#" class="">
-                        <span class="icon">
-                            <ion-icon name="analytics-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-
-
-
-                <li class="mb-2 item">
-                    <a href="students.php" class="">
-                        <span class="icon">
-                            <ion-icon name="school-outline"></ion-icon>
-                        </span>
-                        <span class="title">Students</span>
-                    </a>
-                </li>
-
-
-                <li class="mb-2 item">
-                    <a href="#" class="">
-                        <span class="icon">
-                            <ion-icon name="alert-outline"></ion-icon>
-                        </span>
-                        <span class="title">Attendance</span>
-                    </a>
-                </li>
-
-                <li class="mb-2 item">
-                    <a href="#" class="">
-                        <span class="icon">
-                            <ion-icon name="people-outline"></ion-icon>
-                        </span>
-                        <span class="title">Admins</span>
-                    </a>
-                </li>
-
-                <li class="mb-2 item">
-                    <a href="#" class="">
-                        <span class="icon">
-                            <ion-icon name="download-outline"></ion-icon>
-                        </span>
-                        <span class="title">Export</span>
-                    </a>
-                </li>
-
-                <li class="mb-2 item">
-                    <a href="#" class="">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Logout</span>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-
-        <div class="main flex-1 flex flex-col overflow-hidden transition-all duration-500 bg-white">
-            <div class="topbar w-full h-16 flex items-center justify-between bg-white p-4">
-                <div class="toggle text-gray-800 cursor-pointer">
-                    <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
-                </div>
-
-                <div class="admin w-14 h-14 overflow-hidden rounded-full cursor-pointer">
-                    <img src="../pictures/student5651.jpg" alt="profile picture" class="w-full h-full object-cover">
-                </div>
-            </div>
+<?php
+require_once('panel.php');
+?>
 
 
             <?php
             require_once('config.php');
 
-            $query = "SELECT students.*, classes.class_name 
+            $query = "SELECT students.*, classes.class_name, studentsimages.image, studentsimages.imageType
             FROM students 
-            LEFT JOIN classes ON students.class_id = classes.class_id";
+            LEFT JOIN classes ON students.class_id = classes.class_id
+            LEFT JOIN studentsimages ON students.student_id = studentsimages.student_id";
 
             $result = $conn->query($query);
 
@@ -116,10 +36,13 @@ session_start();
             if ($result->num_rows > 0) {
             ?>
                 <div class='flex items-start justify-center p-4 mb-32'>
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-4/5">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-11/12">
                         <table class="w-full text-sm text-left rtl:text-right text-blue-100 dark:text-blue-100">
                             <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
                                 <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Student picture
+                                    </th>
                                     <th scope="col" class="px-6 py-3">
                                         Student id
                                     </th>
@@ -145,7 +68,14 @@ session_start();
                             <?php
 
                             while ($row = $result->fetch_assoc()) {
+                                // $getFile = "data:" . $row['imageType'] . ";base64," . base64_encode($row['image']);
+                                $getFile = "data:" . $row['imageType'] . ";base64," . base64_encode($row['image']);
                                 echo '<tr class="bg-gray-600 border-b border-blue-400">
+                                <td class="px-6 py-4">
+                                <div class="admin w-16 h-16 overflow-hidden rounded-full cursor-pointer">
+                                <img src="' . $getFile . '" alt=" student picture" class="w-full h-full object-cover">
+                                </div>
+                                </td>
                                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100"> ' . $row['student_id'] . '</th>
                                 <td class="px-6 py-4">' . $row['full_name'] . '</td>
                                 <td class="px-6 py-4">' . $row['class_name'] . '</td>
@@ -164,21 +94,17 @@ session_start();
                             echo "<p>No students found.</p>";
                         }
                             ?>
-                            
-
-                <script>
-                    function handleBoxClick(boxType) {
-                        alert("Clicked on " + boxType);
-
-                    }
-                </script>
 
 
+                            <script>
+                                function handleBoxClick(boxType) {
+                                    alert("Clicked on " + boxType);
 
-                <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-                <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+                                }
+                            </script>
 
-                <script src="../JS/main.js"></script>
+
+
 
 </body>
 
