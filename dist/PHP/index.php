@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +40,7 @@ require_once('panel.php');
 
                     <a href="#" class="box border rounded-md p-8 bg-white shadow-md text-center">
                         <?php
-                        $select_account = mysqli_query($conn, "SELECT * FROM `users`") or die('query failed');
+                        $select_account = mysqli_query($conn, "SELECT * FROM `admins`") or die('query failed');
                         $number_of_account = mysqli_num_rows($select_account);
                         ?>
                         <h3 class="text-5xl font-bold text-blue-700"><?php echo $number_of_account; ?></h3>

@@ -28,20 +28,19 @@ toggle.onclick = function () {
   }
 };
 
-
 function showMessage(message, type) {
-  var messageDiv = document.getElementById('message');
+  var messageDiv = document.getElementById("message");
 
   // Create a new paragraph element for the message
-  var messageParagraph = document.createElement('p');
+  var messageParagraph = document.createElement("p");
   messageParagraph.textContent = message;
 
   // Clear existing content and append the new paragraph
-  messageDiv.innerHTML = '';
+  messageDiv.innerHTML = "";
   messageDiv.appendChild(messageParagraph);
 
   // Create a new button element
-  var closeButton = document.createElement('button');
+  var closeButton = document.createElement("button");
   closeButton.innerHTML = '<ion-icon name="close-outline"></ion-icon>';
   closeButton.onclick = hideMessage; // Set the onclick event for the button
 
@@ -49,16 +48,18 @@ function showMessage(message, type) {
   messageDiv.appendChild(closeButton);
 
   // Set the display style and apply the appropriate class
-  messageDiv.style.display = 'block';
+  messageDiv.style.display = "block";
 
-  if (type === 'success') {
-    messageDiv.classList.add('success');
-  } else if (type === 'error') {
-    messageDiv.classList.add('error');
+  if (type === "success") {
+    messageDiv.classList.add("success");
+  } else if (type === "error") {
+    messageDiv.classList.add("error");
   }
 }
 
 function hideMessage() {
-  var messageDiv = document.getElementById('message');
-  messageDiv.style.display = 'none';
+  var messageDiv = document.getElementById("message");
+  messageDiv.style.display = "none";
 }
+
+

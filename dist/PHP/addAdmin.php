@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,9 +122,9 @@
         $full_name = $_POST['full_name'];
         $user_name = $_POST['user_name'];
         $user_email = $_POST['user_email'];
-        $password = $_POST['password'];
+        $password_user = $_POST['password'];
         if (isset($_FILES["picture_profile"]) && $_FILES["picture_profile"]["error"] == 0) {
-            if (empty($full_name) || empty($user_name) || empty($user_email) || empty($password)) {
+            if (empty($full_name) || empty($user_name) || empty($user_email) || empty($password_user)) {
                 echo "<script>
             showMessage('Veuillez remplir tous les champs du formulaire.', 'error');
             </script>";
@@ -143,8 +146,8 @@
                 if (in_array($photo["type"], $allowedTypes)) {
                     $imageData = file_get_contents($photo["tmp_name"]);
                     $imageType = $photo["type"];
-
-                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                    // echo '<br> <br> <br> '.$password_user.'<br> <br> <br> ';
+                    $hashed_password = password_hash($password_user, PASSWORD_DEFAULT);
                     $sql = "INSERT INTO admins (full_name, user_name, user_email, profile_picture, TypeImage, password) VALUES (:full_name, :user_name, :user_email, :imageData, :imageType, :hashed_password)";
                     $stmtImage = $pdo->prepare($sql);
                     $stmtImage->bindParam(":full_name", $full_name);
