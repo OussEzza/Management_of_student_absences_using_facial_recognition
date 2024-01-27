@@ -5,6 +5,8 @@ module.exports = {
     extend: {
       backgroundColor: ['hover'],
       textColor: ['hover'],
+      backgroundColor: ['active', 'group-hover'],
+      textColor: ['active', 'group-hover'],
     },
   },
   plugins: [],

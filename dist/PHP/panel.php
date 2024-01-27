@@ -6,15 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../output.css">
     <link rel="stylesheet" href="../CSS/style.css">
-    <title>Document</title>
+    <title>Panel</title>
 </head>
 
 <body>
+    <div id="message" class="message">
+        <!-- Le message sera affiché ici -->
+
+        <!-- <button onclick="hideMessage()">Delete</button> -->
+    </div>
     <div class="main-container flex h-screen">
         <div class="navigation bg-gray-800 text-white w-64 pl-4 pt-4 pb-4 text-xl">
             <ul>
                 <li class="mb-2">
-                    <a href="#" class="flex space-x-2 mb-8">
+                    <a href="index.php" class="flex space-x-2 mb-8">
                         <span class="icon">
                             <ion-icon name="logo-microsoft"></ion-icon>
                         </span>
@@ -24,7 +29,7 @@
 
 
                 <li class="mb-2 item">
-                    <a href="#" class="">
+                    <a href="index.php" class="">
                         <span class="icon">
                             <ion-icon name="analytics-outline"></ion-icon>
                         </span>
@@ -32,20 +37,32 @@
                     </a>
                 </li>
 
-
-
-                <li class="mb-2 item">
-                    <a href="students.php" class="">
+                <!-- Main Menu Item -->
+                <li class="mb-2 item main-menu relative group">
+                    <a href="students.php" class="flex items-center">
                         <span class="icon">
                             <ion-icon name="school-outline"></ion-icon>
                         </span>
                         <span class="title">Students</span>
                     </a>
+                    <!-- Submenus for Students -->
+                    <div class="submenu-container absolute bg-white text-gray-800 shadow-md z-10 right-0 mt-2">
+                        <ul class="submenu">
+                            <li class="subitem">
+                                <a href="students-list.php" class="block px-4 py-2">Student List</a>
+                            </li>
+                            <li class="subitem">
+                                <a href="add-student.php" class="block px-4 py-2">Add Student</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
 
+
+
                 <li class="mb-2 item">
-                    <a href="#" class="">
+                    <a href="Attendance.php" class="">
                         <span class="icon">
                             <ion-icon name="alert-outline"></ion-icon>
                         </span>
