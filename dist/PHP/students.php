@@ -178,7 +178,6 @@ session_start();
                             $stmtStudent->execute();
 
                             echo "<script>
-                                    
                                         showMessage('L\'étudiant a été ajouté avec succès.', 'success');
                                         </script>";
                         } else {
