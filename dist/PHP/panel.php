@@ -19,7 +19,7 @@
         <div class="navigation bg-gray-800 text-white w-64 pl-4 pt-4 pb-4 text-xl">
             <ul>
                 <li class="mb-2">
-                    <a href="index.php" class="flex space-x-2 mb-8">
+                    <a href="index.php" class="">
                         <span class="icon">
                             <ion-icon name="logo-microsoft"></ion-icon>
                         </span>

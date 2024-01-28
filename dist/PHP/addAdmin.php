@@ -10,7 +10,7 @@ session_start();
     <link rel="stylesheet" href="../output.css">
     <title>Add Admin</title>
     <style>
-        .profile_pic{
+        .profile_pic {
             width: 80px;
         }
     </style>
@@ -29,9 +29,9 @@ session_start();
     ?>
 
     <div class="min-h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded shadow-md max-w-3xl w-full">
+        <div class="bg-white p-8 rounded shadow-md max-w-4xl">
 
-            <h2 class="text-2xl font-semibold mb-6">Liste des administrateurs</h2>
+            <h2 class="text-2xl text-center font-semibold mb-6">Liste des administrateurs</h2>
 
             <!-- Tableau responsive Tailwind CSS -->
             <div class="overflow-x-auto">
@@ -57,9 +57,11 @@ session_start();
                                 <td class="border px-4 py-2"><?= $row['user_name'] ?></td>
                                 <td class="border px-4 py-2"><?= $row['user_email'] ?></td>
                                 <td class="border px-4 py-2">
-                                    <button class="bg-green-500 text-white px-3 py-1 rounded-full mr-2">Edit</button>
-                                    <button class="bg-red-500 text-white px-3 py-1 rounded-full">Delete</button>
+                                    <a href="edit_student.php?id=<?= $row['user_id'] ?>" class="hover:underline"><button class="bg-green-500 text-white px-3 py-1 rounded-full">Edit</button></a>
+                                    |
+                                    <a href="delete_student.php?id=<?= $row['user_id'] ?>" class="hover:underline"><button class="bg-red-500 text-white px-3 py-1 rounded-full">Delete</button></a>
                                 </td>
+
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -118,7 +120,6 @@ session_start();
     <?php
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Récupération des données du formulaire
         $full_name = $_POST['full_name'];
         $user_name = $_POST['user_name'];
         $user_email = $_POST['user_email'];
@@ -160,8 +161,8 @@ session_start();
 
 
                     echo "<script>
-            showMessage('Inscription réussie!', 'success');
-            </script>";
+                        showMessage('Inscription réussie!', 'success');
+                        </script>";
                 } else {
                     echo "<script>showMessage('Seules les images au format JPEG, PNG et GIF sont autorisées.', 'error');</script>";
                 }
