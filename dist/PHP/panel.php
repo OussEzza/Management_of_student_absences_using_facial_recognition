@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="mb-2 item">
-                    <a href="#" class="">
+                    <a href="addAdmin.php" class="">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>
@@ -80,7 +80,7 @@
                 </li>
 
                 <li class="mb-2 item">
-                    <a href="#" class="">
+                    <a href="export_attendance.php" class="">
                         <span class="icon">
                             <ion-icon name="download-outline"></ion-icon>
                         </span>

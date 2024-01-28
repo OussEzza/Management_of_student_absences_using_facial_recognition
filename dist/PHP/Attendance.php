@@ -59,8 +59,7 @@ session_start();
                 // Affiche les relevés de présence filtrés
                 if ($result->num_rows > 0) {
             ?>
-
-                    <h2 class='text-xl font-bold mb-2 text-center'>Filtered Attendance Records</h2>
+                    <h2 class='text-xl font-bold mb-2 text-center'>Filtered Attendance Records <?php echo 'for '. $dateFilter; ?></h2>
                     <table class="w-full text-sm text-left rtl:text-right text-black dark:text-black">
                         <thead class="text-xs text-black uppercase bg-blue-600 dark:text-white">
                             <tr>
