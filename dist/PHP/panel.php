@@ -71,7 +71,7 @@
                 </li>
 
                 <li class="mb-2 item">
-                    <a href="addAdmin.php" class="">
+                    <a href="ManageAdmin.php" class="">
                         <span class="icon">
                             <ion-icon name="people-outline"></ion-icon>
                         </span>

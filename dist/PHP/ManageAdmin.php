@@ -22,10 +22,8 @@ session_start();
     require_once('panel.php');
     require_once('config.php');
 
-    // Récupérer la liste des administrateurs depuis la base de données
     $sql = "SELECT * FROM admins";
     $result = $conn->query($sql);
-    // $admins = $result->fetch_assoc()
     ?>
 
     <div class="min-h-screen flex items-center justify-center">
@@ -33,7 +31,6 @@ session_start();
 
             <h2 class="text-2xl text-center font-semibold mb-6">Liste des administrateurs</h2>
 
-            <!-- Tableau responsive Tailwind CSS -->
             <div class="overflow-x-auto">
                 <table class="table-auto w-full">
                     <thead>
@@ -79,31 +76,26 @@ session_start();
 
             <form action="" method="POST" enctype="multipart/form-data">
 
-                <!-- Picture Profile -->
                 <div class="mb-4">
                     <label for="picture_profile" class="block text-gray-700 text-sm font-medium mb-2">Photo de profil</label>
                     <input type="file" id="picture_profile" name="picture_profile" required class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                 </div>
 
-                <!-- Full Name -->
                 <div class="mb-4">
                     <label for="full_name" class="block text-gray-700 text-sm font-medium mb-2">Nom complet</label>
                     <input type="text" id="full_name" name="full_name" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                 </div>
 
-                <!-- User Name -->
                 <div class="mb-4">
                     <label for="user_name" class="block text-gray-700 text-sm font-medium mb-2">Nom d'utilisateur</label>
                     <input type="text" id="user_name" name="user_name" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                 </div>
 
-                <!-- User Email -->
                 <div class="mb-4">
                     <label for="user_email" class="block text-gray-700 text-sm font-medium mb-2">Adresse e-mail</label>
                     <input type="email" id="user_email" name="user_email" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                 </div>
 
-                <!-- Password -->
                 <div class="mb-6">
                     <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Mot de passe</label>
                     <input type="password" id="password" name="password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
