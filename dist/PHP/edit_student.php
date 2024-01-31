@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['email'])) {
+    header('location:login.php');
+} else {
+    $user_id = $_SESSION['id'];
+
+
 
 require_once('config.php');
 
@@ -84,3 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
+
+<?php
+}
+?>

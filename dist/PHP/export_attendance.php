@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+    header('location:login.php');
+} else {
+    $user_id = $_SESSION['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,3 +38,7 @@
 </body>
 
 </html>
+
+<?php
+}
+?>

@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['email'])) {
+    header('location:login.php');
+} else {
+    $user_id = $_SESSION['id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,8 +128,8 @@ session_start();
                 <label for="major" class="block mt-4 text-sm font-medium text-gray-600">Spécialité :</label>
                 <input type="text" name="major" id="major" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
 
-                <label for="classe_name" class="block mt-4 text-sm font-medium text-gray-600">Nom de la classe :</label>
-                <input type="text" name="classe_name" id="classe_name" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
+                <!-- <label for="classe_name" class="block mt-4 text-sm font-medium text-gray-600">Nom de la classe :</label>
+                <input type="text" name="classe_name" id="classe_name" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500"> -->
 
                 <label for="student_photo" class="block mt-4 text-sm font-medium text-gray-600">Choisir une photo :</label>
                 <input type="file" name="student_photo" id="student_photo" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
@@ -152,7 +157,7 @@ session_start();
                     $student_id = $_POST["student_id"];
                     $full_name = $_POST["full_name"];
                     $major = $_POST["major"];
-                    $class_id = 1;
+                    // $class_id = 1;
 
                     if (isset($_FILES["student_photo"]) && $_FILES["student_photo"]["error"] == 0) {
                         $photo = $_FILES["student_photo"];
@@ -169,12 +174,11 @@ session_start();
                             $stmtImage->bindParam(":imageType", $imageType);
                             $stmtImage->execute();
 
-                            $sqlStudent = "INSERT INTO students (student_id, full_name, major, class_id) VALUES (:student_id, :full_name, :major, :class_id)";
+                            $sqlStudent = "INSERT INTO students (student_id, full_name, major) VALUES (:student_id, :full_name, :major)";
                             $stmtStudent = $pdo->prepare($sqlStudent);
                             $stmtStudent->bindParam(":student_id", $student_id);
                             $stmtStudent->bindParam(":full_name", $full_name);
                             $stmtStudent->bindParam(":major", $major);
-                            $stmtStudent->bindParam(":class_id", $class_id);
                             $stmtStudent->execute();
 
                             echo "<script>
@@ -223,3 +227,6 @@ session_start();
 </body>
 
 </html>
+<?php
+}
+?>
