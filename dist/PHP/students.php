@@ -192,10 +192,29 @@ if (!isset($_SESSION['email'])) {
                                 $destinationPath = "../../images/" . $newFileName;
 
                                 move_uploaded_file($_FILES["student_photo"]["tmp_name"], $destinationPath);
-                                // Execute Python script to encode the student's photo
-                                $pythonScriptPath = "../../Encodeimg.py";
-                                $command = "python3 $pythonScriptPath";
-                                exec($command);
+
+                                // $pythonExecutablePath = 'C:\\Path\\To\\Python\\python.exe';
+                                $pythonExecutablePath = 'C:\\ProgramData\\anaconda3\\envs\\ManagementOfStudentAbsencesUsingFacialRecognition\\python.exe';
+                                $pythonScriptPath = 'C:\\xampp1\\htdocs\\Management_of_student_absences_using_facial_recognition\\dist\\PHP\\test.py';
+
+                                // Use escapeshellarg to escape the script path
+                                $escapedScriptPath = escapeshellarg($pythonScriptPath);
+
+                                // Use the full path to the Python interpreter and the escaped script path
+                                $command = "{$pythonExecutablePath} {$escapedScriptPath} 2>&1";
+
+                                // Execute the command and capture both output and return code
+                                $output = shell_exec($command);
+                                $returnCode = 0;  // Default return code is 0 for success
+
+                                // If exec is used, $? will contain the return value of the executed command
+                                // Note: This will only work if you use exec, not shell_exec
+                                exec($command, $outputArray, $returnCode);
+
+                                // Output the results
+                                echo 'output: ' . $output . '<br>';
+                                echo 'return code: ' . $returnCode . '<br>';
+
 
                                 echo "<script>
                                         showMessage('L\'étudiant a été ajouté avec succès.', 'success');
