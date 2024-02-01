@@ -45,14 +45,12 @@ session_start();
                         $_SESSION["username"] = $admin['user_name'];
                         $_SESSION["email"] = $admin['user_email'];
 
-                        // Authentification réussie
-                        echo '<div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
-                        <ion-icon name="checkmark-outline" class="text-3xl"></ion-icon>
-                        <p>Connexion réussie !</p>
-                        </div>';
-                        // Redirigez l'utilisateur vers la page souhaitée après la connexion
-                        // header("Location: dashboard.php");
-                        // exit();
+                        // echo '<div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
+                        // <ion-icon name="checkmark-outline" class="text-3xl"></ion-icon>
+                        // <p>Connexion réussie !</p>
+                        // </div>';
+                        header("Location: index.php");
+                        exit();
                     } else {
                         // Authentification échouée
                         echo '<div role="alert">

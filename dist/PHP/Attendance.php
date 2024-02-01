@@ -20,8 +20,10 @@ if (!isset($_SESSION['email'])) {
     <body>
         <?php
         require_once('panel.php');
+        require_once('config.php');
+
         ?>
-        <section id="AttendanceStatic">
+        <section id="AttendanceStatic" class="p-5 mb-5">
             <?php
             // Récupère le nombre total d'étudiants
             $totalStudentsQuery = "SELECT COUNT(*) as total_students FROM students";
@@ -63,7 +65,7 @@ if (!isset($_SESSION['email'])) {
 
                     <!-- Champ de recherche -->
                     <div class="mb-4">
-                        <label for="searchInput" class="block text-gray-700 text-sm font-bold mb-2">Search:</label>
+                        <label for="searchInput" class="block text-gray-700 text-sm font-bold mb-2">Student name:</label>
                         <input type="text" id="searchInput" name="searchInput" class="border-b-2 border-gray-800 border-solid rounded w-full py-2 px-3 cursor-pointer">
                     </div>
 
@@ -73,7 +75,6 @@ if (!isset($_SESSION['email'])) {
 
                 <!-- Affiche les relevés de présence filtrés -->
                 <?php
-                require_once('config.php');
                 if (isset($_POST['search'])) {
                     // Récupère les valeurs des filtres
                     $dateFilter = isset($_POST['dateFilter']) ? $_POST['dateFilter'] : '';
