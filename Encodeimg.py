@@ -9,7 +9,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     password="",
-    database="test",
+    database="managementofstudentabsences",
     # connect_timeout=120  # Set a higher timeout value (in seconds)
 )
 
@@ -29,20 +29,20 @@ try:
     studentIds = []
 
     # Insertion des images dans la base de données MySQL
-    for path in pathList:
-        img = cv2.imread(os.path.join(folderPath, path))
-        student_id = os.path.splitext(path)[0]
+    # for path in pathList:
+    #     img = cv2.imread(os.path.join(folderPath, path))
+    #     student_id = os.path.splitext(path)[0]
 
-        # Insertion des données dans la base de données MySQL
-        sql = "INSERT INTO StudentsImages (student_id, image) VALUES (%s, %s)"
-        val = (student_id, pickle.dumps(img))
-        mycursor.execute(sql, val)
+    #     # Insertion des données dans la base de données MySQL
+    #     sql = "INSERT INTO studentsimages (student_id, image) VALUES (%s, %s)"
+    #     val = (student_id, pickle.dumps(img))
+    #     mycursor.execute(sql, val)
 
-        # Valider les changements dans la base de données
-        mydb.commit()
+    #     # Valider les changements dans la base de données
+    #     mydb.commit()
 
-        imgList.append(img)
-        studentIds.append(student_id)
+    #     imgList.append(img)
+    #     studentIds.append(student_id)
 
     # print(studentIds)
 

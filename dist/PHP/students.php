@@ -161,6 +161,7 @@ if (!isset($_SESSION['email'])) {
                         if (isset($_FILES["student_photo"]) && $_FILES["student_photo"]["error"] == 0) {
                             $photo = $_FILES["student_photo"];
 
+
                             $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
                             if (in_array($photo["type"], $allowedTypes)) {
                                 $imageData = file_get_contents($photo["tmp_name"]);
@@ -179,6 +180,22 @@ if (!isset($_SESSION['email'])) {
                                 $stmtStudent->bindParam(":full_name", $full_name);
                                 $stmtStudent->bindParam(":major", $major);
                                 $stmtStudent->execute();
+
+                                // Rename and move the uploaded file
+                                $originalFileName = $_FILES["student_photo"]["name"];
+                                $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
+                                // Generate the filename using the student ID
+                                $newFileName = $student_id . "." . $extension;
+
+                                // Set the destination path for the uploaded file
+                                $destinationPath = "../../images/" . $newFileName;
+
+                                move_uploaded_file($_FILES["student_photo"]["tmp_name"], $destinationPath);
+                                // Execute Python script to encode the student's photo
+                                $pythonScriptPath = "../../Encodeimg.py";
+                                $command = "python3 $pythonScriptPath";
+                                exec($command);
 
                                 echo "<script>
                                         showMessage('L\'étudiant a été ajouté avec succès.', 'success');
