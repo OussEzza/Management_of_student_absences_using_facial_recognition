@@ -59,9 +59,9 @@ if (!isset($_SESSION['email'])) {
                                     <td class="border px-4 py-2"><?= $row['user_name'] ?></td>
                                     <td class="border px-4 py-2"><?= $row['user_email'] ?></td>
                                     <td class="border px-4 py-2">
-                                        <a href="edit_student.php?id=<?= $row['user_id'] ?>" class="hover:underline"><button class="bg-green-500 text-white px-3 py-1 rounded-full">Edit</button></a>
+                                        <a href="edit_admin.php?id=<?= $row['user_id'] ?>" class="hover:underline"><button class="bg-green-500 text-white px-3 py-1 rounded-full">Edit</button></a>
                                         |
-                                        <a href="delete_student.php?id=<?= $row['user_id'] ?>" class="hover:underline"><button class="bg-red-500 text-white px-3 py-1 rounded-full">Delete</button></a>
+                                        <a href="delete_admin.php?id=<?= $row['user_id'] ?>" class="hover:underline"><button class="bg-red-500 text-white px-3 py-1 rounded-full">Delete</button></a>
                                     </td>
 
                                 </tr>
