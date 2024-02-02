@@ -260,7 +260,6 @@ if (!isset($_SESSION['email'])) {
             <script src="../JS/main.js"></script>
 
     </body>
-
     </html>
 <?php
 }

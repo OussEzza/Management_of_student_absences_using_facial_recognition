@@ -31,13 +31,13 @@ if (!isset($_SESSION['email'])) {
         $result = $conn->query($sql);
         ?>
 
-        <div class="min-h-screen flex items-center justify-center">
-            <div class="bg-white p-8 rounded shadow-md max-w-4xl">
+        <div class=" flex items-center justify-center">
+            <div class="bg-white p-8 rounded shadow-md max-w-5xl">
 
                 <h2 class="text-2xl text-center font-semibold mb-6">Liste des administrateurs</h2>
 
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-full">
+                    <table class="table-auto w-full mb-8">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2">#</th>
@@ -102,16 +102,27 @@ if (!isset($_SESSION['email'])) {
                         <p id="emailValidationError" class="text-red-500 hidden">Adresse e-mail invalide.</p>
                     </div>
 
-                    <div class="mb-6">
-                        <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Mot de passe</label>
-                        <input type="password" id="password" name="password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validatePasswords()" required>
+                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Mot de passe</label>
+                    <div class="mb-6 flex items-center">
+                        <div class="relative w-full">
+                            <input type="password" id="password" name="password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validatePasswords()" required>
+                            <button type="button" id="togglePassword" class="absolute right-0 top-0 mt-3 mr-4 text-2xl text-gray-600 cursor-pointer">
+                                <ion-icon name="eye-off-outline"></ion-icon>
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="mb-6">
-                        <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirmer le mot de passe</label>
-                        <input type="password" id="confirm_password" name="confirm_password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validatePasswords()" required>
-                        <p id="passwordMatchError" class="text-red-500 hidden">Les deux mots de passe ne correspondent pas.</p>
+                    <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirmer le mot de passe</label>
+                    <div class="mb-6 flex items-center">
+                        <div class="relative w-full">
+                            <input type="password" id="confirm_password" name="confirm_password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validatePasswords()" required>
+                            <button type="button" id="togglePasswordConfirm" class="absolute right-0 top-0 mt-3 mr-4 text-2xl text-gray-600 cursor-pointer">
+                                <ion-icon name="eye-off-outline"></ion-icon>
+                            </button>
+                            <p id="passwordMatchError" class="text-red-500 hidden">Les deux mots de passe ne correspondent pas.</p>
+                        </div>
                     </div>
+
 
                     <button type="submit" class="w-full bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-900 focus:outline-none focus:shadow-outline-blue">
                         S'inscrire
@@ -228,6 +239,35 @@ if (!isset($_SESSION['email'])) {
                     emailValidationError.style.display = 'none';
                 }
             }
+
+
+            // Change le texte du bouton en fonction du type de mot de passe
+
+            document.addEventListener("DOMContentLoaded", function() {
+                var togglePassword = document.getElementById("togglePassword");
+                var passwordInput = document.getElementById("password");
+
+                togglePassword.addEventListener("click", function() {
+                    var type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                    passwordInput.setAttribute("type", type);
+
+                    // Change le texte du bouton en fonction du type de mot de passe
+                    togglePassword.innerHTML = type === "password" ? '<ion-icon name="eye-off-outline"></ion-icon>' : '<ion-icon name="eye-outline"></ion-icon>';
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function() {
+                var togglePassword = document.getElementById("togglePasswordConfirm");
+                var passwordInput = document.getElementById("confirm_password");
+
+                togglePassword.addEventListener("click", function() {
+                    var type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                    passwordInput.setAttribute("type", type);
+
+                    // Change le texte du bouton en fonction du type de mot de passe
+                    togglePassword.innerHTML = type === "password" ? '<ion-icon name="eye-off-outline"></ion-icon>' : '<ion-icon name="eye-outline"></ion-icon>';
+                });
+            });
         </script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

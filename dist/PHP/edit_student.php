@@ -13,9 +13,9 @@ require_once('config.php');
 if (isset($_GET['id'])) {
     $studentId = $_GET['id'];
 
-    $query = "SELECT students.*, classes.class_name 
+    $query = "SELECT * 
     FROM students 
-    LEFT JOIN classes ON students.class_id = classes.class_id";
+    WHERE student_id = $studentId";
 
     $result = $conn->query($query);
 
@@ -35,13 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newId = $_POST['newId'];
     $newName = $_POST["newName"];
     $newDepartment = $_POST["newDepartment"];
-    $newClass = $_POST['newClass'];
+    // $newClass = $_POST['newClass'];
 
     $updateStudentQuery = "UPDATE students SET student_id = $newId, full_name = '$newName', Major = '$newDepartment' WHERE student_id = $studentId";
-    $updateClassQuery = "UPDATE classes SET class_name = '$newClass' WHERE class_id = (SELECT class_id FROM students WHERE student_id = $studentId)";
+    // $updateClassQuery = "UPDATE classes SET class_name = '$newClass' WHERE class_id = (SELECT class_id FROM students WHERE student_id = $studentId)";
 
     $conn->query($updateStudentQuery);
-    $conn->query($updateClassQuery);
+    // $conn->query($updateClassQuery);
 
     header("Location: students.php");
     exit();
@@ -75,10 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="newDepartment" class="block text-gray-700 text-sm font-bold mb-2">New Department:</label>
                     <input type="text" name="newDepartment" value="<?php echo $student['Major']; ?>" required class="w-full border rounded py-2 px-3 focus:outline-none focus:border-blue-500">
                 </div>
-                <div class="mb-4">
-                    <label for="newClass" class="block text-gray-700 text-sm font-bold mb-2">New Class:</label>
-                    <input type="text" name="newClass" value="<?php echo $student['class_name']; ?>" required class="w-full border rounded py-2 px-3 focus:outline-none focus:border-blue-500">
-                </div>
+                
                 <div class="text-center">
                     <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
                         Save Changes

@@ -741,8 +741,8 @@ video {
   width: 100%;
 }
 
-.max-w-4xl{
-  max-width: 56rem;
+.max-w-5xl{
+  max-width: 64rem;
 }
 
 .max-w-6xl{
@@ -1248,6 +1248,11 @@ video {
 .hover\:bg-indigo-600:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-red-700:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
 .hover\:text-gray-300:hover{
