@@ -36,7 +36,7 @@ session_start();
             } else {
 
                 $result = mysqli_query($conn, "SELECT * FROM admins WHERE user_email='$user_email'") or die(mysqli_error($conn));
-                
+
                 if ($result->num_rows > 0) {
                     $admin = mysqli_fetch_assoc($result);
                     $passwordAdmin = $admin['password'];
@@ -106,6 +106,11 @@ session_start();
                     <button name="login" type="submit" class="w-full bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-900 focus:outline-none focus:shadow-outline-blue">
                         Se connecter
                     </button>
+                    <div class="font-medium text-blue-700 hover:underline mt-2">
+                        <a href="rest_pass.php" class="inline-block transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:underline">
+                            Forgot password?
+                        </a>
+                    </div>
 
                 </form>
             </div>
