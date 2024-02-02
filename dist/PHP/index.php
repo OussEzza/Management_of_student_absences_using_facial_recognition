@@ -64,12 +64,45 @@ if (!isset($_SESSION['email'])) {
                     <h3 class="text-5xl font-bold text-blue-700"><?php echo $totalPresent; ?></h3>
                     <p class="mt-6 p-6 bg-gray-100 text-gray-800 text-2xl rounded border">Attendance totals</p>
                 </a>
-                
+
+                <?php
+                $totalStudentsQuery = "SELECT COUNT(*) as total_students FROM students";
+                $totalStudentsResult = $conn->query($totalStudentsQuery);
+                $totalStudents = $totalStudentsResult->fetch_assoc()['total_students'];
+
+                $selectedDate = date('Y-m-d');
+                $totalPresentQuery = "SELECT COUNT(DISTINCT student_id) as total_present FROM attendancerecords WHERE date_time LIKE '%$selectedDate%'";
+                $totalPresentResult = $conn->query($totalPresentQuery);
+                $totalPresent = $totalPresentResult->fetch_assoc()['total_present'];
+
+                $attendanceRate = ($totalPresent / $totalStudents) * 100;
+                ?>
+                <a href="Attendance.php" class="box border rounded-md p-8 bg-white shadow-md text-center">
+                    <div class="mt-6 p-6 bg-gray-100 text-gray-800 text-2xl rounded border">
+                        <p class="">Total Students:
+                            <span class="text-3xl font-bold text-blue-700">
+                                <?php echo $totalStudents; ?>
+                            </span>
+                        </p>
+                        <p class="">Total Present:
+                            <span class="text-3xl font-bold text-blue-700">
+                                <?php echo $totalPresent; ?>
+                            </span>
+                        </p>
+                        <p class="">Attendance Rate:
+                            <span class="text-3xl font-bold text-blue-700">
+                                <?php echo number_format($attendanceRate, 2); ?>%
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="rounded-b-lg overflow-hidden mt-4">
+                        <canvas id='attendanceChart' width='400' height='200'></canvas>
+                    </div>
+                </a>
 
 
-                <!-- Repeat the box structure for additional items -->
 
-            </div>
         </section>
 
         </div>
@@ -89,6 +122,39 @@ if (!isset($_SESSION['email'])) {
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
         <script src="../JS/main.js"></script>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Exemple de code pour initialiser un graphique avec Chart.js
+            var ctx = document.getElementById('attendanceChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Students', 'Total Present'],
+                    datasets: [{
+                        label: 'Attendance Statistics',
+                        data: [<?php echo $totalStudents; ?>, <?php echo $totalPresent; ?>],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
     </body>
 
     </html>
