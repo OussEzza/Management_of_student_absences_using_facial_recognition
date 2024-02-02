@@ -661,6 +661,10 @@ video {
   margin-top: 2rem;
 }
 
+.mr-2{
+  margin-right: 0.5rem;
+}
+
 .block{
   display: block;
 }
@@ -1059,6 +1063,11 @@ video {
   line-height: 1rem;
 }
 
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .font-bold{
   font-weight: 700;
 }
@@ -1322,8 +1331,8 @@ video {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .lg\:grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .lg\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -1332,8 +1341,8 @@ video {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .xl\:grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .xl\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

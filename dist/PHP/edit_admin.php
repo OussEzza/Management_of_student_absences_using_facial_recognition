@@ -11,7 +11,6 @@ if (!isset($_SESSION['email'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
         $admin_id = $_GET['id'];
 
-        // Fetch admin details based on $admin_id
         $selectAdminQuery = "SELECT * FROM admins WHERE user_id = '$admin_id'";
         $resultAdmin = mysqli_query($conn, $selectAdminQuery);
 
@@ -83,46 +82,56 @@ if (!isset($_SESSION['email'])) {
 
         <?php
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $admin_id = $_POST['admin_id'];
-            $full_name = $_POST['full_name'];
-            $user_name = $_POST['user_name'];
-            $user_email = $_POST['user_email'];
-
-            $host = "localhost";
-            $dbname = "managementofstudentabsences";
-            $user = "root";
-            $password = "";
-
-            try {
-                $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-                die("Erreur de connexion à la base de données : " . $e->getMessage());
-            }
-            $photo = $_FILES["picture_profile"];
-
-            $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
-            if (in_array($photo["type"], $allowedTypes)) {
-                $imageData = file_get_contents($photo["tmp_name"]);
-                $imageType = $photo["type"];
-
-                $updateAdminQuery = "UPDATE admins SET full_name = :full_name, user_name = :user_name, user_email = :user_email, profile_picture = :profile_picture, TypeImage = :TypeImage WHERE user_id='$admin_id'";
-
-                $stmtImage = $pdo->prepare($updateAdminQuery);
-                $stmtImage->bindParam(":full_name", $full_name);
-                $stmtImage->bindParam(":user_name", $user_name);
-                $stmtImage->bindParam(":user_email", $user_email);
-                $stmtImage->bindParam(":profile_picture", $imageData, PDO::PARAM_LOB);
-                $stmtImage->bindParam(":TypeImage", $imageType);
-                $stmtImage->execute();
-
+            $required_permission = 2;
+            $permission = $_SESSION['permission'];
+            $permission_admin_modified = $adminDetails['permissions'];
+            if ($permission < $required_permission && $permission < $permission_admin_modified) {
                 echo "<script>
-                        window.location.href = 'ManageAdmin.php';
+                        showMessage('You don't have the permission for this !', 'error');
                     </script>";
             } else {
-                echo "<script>
-                        showMessage('Error updating admin details.', 'error');
+                $admin_id = $_POST['admin_id'];
+                $full_name = $_POST['full_name'];
+                $user_name = $_POST['user_name'];
+                $user_email = $_POST['user_email'];
+
+                $host = "localhost";
+                $dbname = "managementofstudentabsences";
+                $user = "root";
+                $password = "";
+
+                try {
+                    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                } catch (PDOException $e) {
+                    die("Erreur de connexion à la base de données : " . $e->getMessage());
+                }
+                $photo = $_FILES["picture_profile"];
+
+                $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+
+                if (in_array($photo["type"], $allowedTypes)) {
+                    $imageData = file_get_contents($photo["tmp_name"]);
+                    $imageType = $photo["type"];
+
+                    $updateAdminQuery = "UPDATE admins SET full_name = :full_name, user_name = :user_name, user_email = :user_email, profile_picture = :profile_picture, TypeImage = :TypeImage WHERE user_id='$admin_id'";
+
+                    $stmtImage = $pdo->prepare($updateAdminQuery);
+                    $stmtImage->bindParam(":full_name", $full_name);
+                    $stmtImage->bindParam(":user_name", $user_name);
+                    $stmtImage->bindParam(":user_email", $user_email);
+                    $stmtImage->bindParam(":profile_picture", $imageData, PDO::PARAM_LOB);
+                    $stmtImage->bindParam(":TypeImage", $imageType);
+                    $stmtImage->execute();
+
+                    echo "<script>
+                        window.location.href = 'ManageAdmin.php';
                     </script>";
+                } else {
+                    echo "<script>
+                showMessage('Error updating admin details.', 'error');
+                </script>";
+                }
             }
         }
         ?>

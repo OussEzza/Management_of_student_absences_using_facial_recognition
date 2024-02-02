@@ -102,6 +102,15 @@ if (!isset($_SESSION['email'])) {
                         <p id="emailValidationError" class="text-red-500 hidden">Adresse e-mail invalide.</p>
                     </div>
 
+                    <div class="mb-4">
+                        <label for="admin_permission" class="block text-gray-700 text-sm font-medium mb-2">Type de permission d'admin</label>
+                        <select id="admin_permission" name="admin_permission" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" required>
+                            <option value="3">Super Admin</option>
+                            <option value="2">Admin</option>
+                            <option value="1">Viewer</option>
+                        </select>
+                    </div>
+
                     <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Mot de passe</label>
                     <div class="mb-6 flex items-center">
                         <div class="relative w-full">
@@ -138,16 +147,22 @@ if (!isset($_SESSION['email'])) {
             $full_name = $_POST['full_name'];
             $user_name = $_POST['user_name'];
             $user_email = $_POST['user_email'];
+            $admin_permission = $_POST['admin_permission'];
             $password_user = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
-
+            
             $checkEmailQuery = "SELECT user_id FROM admins WHERE user_email = '$user_email'";
             $resultEmail = mysqli_query($conn, $checkEmailQuery);
-
+            
             if ($resultEmail) {
                 $rowCount = mysqli_num_rows($resultEmail);
-
-                if ($rowCount > 0) {
+                $required_permission = 2;
+                $permission = $_SESSION['permission'];
+                if ($permission < $required_permission) {
+                    echo "<script>
+                        showMessage('You don't have the permission for this !', 'error');
+                    </script>";
+                } elseif ($rowCount > 0) {
                     echo "<script>
                 showMessage('Cette adresse e-mail est déjà associée à un compte.', 'error');
             </script>";
@@ -186,7 +201,7 @@ if (!isset($_SESSION['email'])) {
                                 $imageType = $photo["type"];
                                 // echo '<br> <br> <br> '.$password_user.'<br> <br> <br> ';
                                 $hashed_password = password_hash($password_user, PASSWORD_DEFAULT);
-                                $sql = "INSERT INTO admins (full_name, user_name, user_email, profile_picture, TypeImage, password) VALUES (:full_name, :user_name, :user_email, :imageData, :imageType, :hashed_password)";
+                                $sql = "INSERT INTO admins (full_name, user_name, user_email, profile_picture, TypeImage, password, permissions) VALUES (:full_name, :user_name, :user_email, :imageData, :imageType, :hashed_password, :admin_permission)";
                                 $stmtImage = $pdo->prepare($sql);
                                 $stmtImage->bindParam(":full_name", $full_name);
                                 $stmtImage->bindParam(":user_name", $user_name);
@@ -194,6 +209,7 @@ if (!isset($_SESSION['email'])) {
                                 $stmtImage->bindParam(":imageData", $imageData, PDO::PARAM_LOB);
                                 $stmtImage->bindParam(":imageType", $imageType);
                                 $stmtImage->bindParam(":hashed_password", $hashed_password);
+                                $stmtImage->bindParam(":admin_permission", $admin_permission);
                                 $stmtImage->execute();
 
 

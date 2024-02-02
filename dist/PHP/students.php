@@ -153,77 +153,84 @@ if (!isset($_SESSION['email'])) {
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (isset($_POST["add_student"])) {
-                        $student_id = $_POST["student_id"];
-                        $full_name = $_POST["full_name"];
-                        $major = $_POST["major"];
-                        // $class_id = 1;
+                        $required_permission = 2;
+                        $permission = $_SESSION['permission'];
+                        if ($permission < $required_permission) {
+                            echo "<script>
+                                    showMessage('You don't have the permission for this !', 'error');
+                                </script>";
+                        } else {
+                            $student_id = $_POST["student_id"];
+                            $full_name = $_POST["full_name"];
+                            $major = $_POST["major"];
 
-                        if (isset($_FILES["student_photo"]) && $_FILES["student_photo"]["error"] == 0) {
-                            $photo = $_FILES["student_photo"];
-
-
-                            $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
-                            if (in_array($photo["type"], $allowedTypes)) {
-                                $imageData = file_get_contents($photo["tmp_name"]);
-                                $imageType = $photo["type"];
-
-                                $sqlImage = "INSERT INTO studentsimages (student_id, image, imageType) VALUES (:student_id, :photo_blob, :imageType)";
-                                $stmtImage = $pdo->prepare($sqlImage);
-                                $stmtImage->bindParam(":student_id", $student_id);
-                                $stmtImage->bindParam(":photo_blob", $imageData, PDO::PARAM_LOB);
-                                $stmtImage->bindParam(":imageType", $imageType);
-                                $stmtImage->execute();
-
-                                $sqlStudent = "INSERT INTO students (student_id, full_name, major) VALUES (:student_id, :full_name, :major)";
-                                $stmtStudent = $pdo->prepare($sqlStudent);
-                                $stmtStudent->bindParam(":student_id", $student_id);
-                                $stmtStudent->bindParam(":full_name", $full_name);
-                                $stmtStudent->bindParam(":major", $major);
-                                $stmtStudent->execute();
-
-                                // Rename and move the uploaded file
-                                $originalFileName = $_FILES["student_photo"]["name"];
-                                $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-
-                                // Generate the filename using the student ID
-                                $newFileName = $student_id . "." . $extension;
-
-                                // Set the destination path for the uploaded file
-                                $destinationPath = "../../images/" . $newFileName;
-
-                                move_uploaded_file($_FILES["student_photo"]["tmp_name"], $destinationPath);
-
-                                // $pythonExecutablePath = 'C:\\Path\\To\\Python\\python.exe';
-                                $pythonExecutablePath = 'C:\\ProgramData\\anaconda3\\envs\\ManagementOfStudentAbsencesUsingFacialRecognition\\python.exe';
-                                $pythonScriptPath = 'C:\\xampp1\\htdocs\\Management_of_student_absences_using_facial_recognition\\dist\\PHP\\test.py';
-
-                                // Use escapeshellarg to escape the script path
-                                $escapedScriptPath = escapeshellarg($pythonScriptPath);
-
-                                // Use the full path to the Python interpreter and the escaped script path
-                                $command = "{$pythonExecutablePath} {$escapedScriptPath} 2>&1";
-
-                                // Execute the command and capture both output and return code
-                                $output = shell_exec($command);
-                                $returnCode = 0;  // Default return code is 0 for success
-
-                                // If exec is used, $? will contain the return value of the executed command
-                                // Note: This will only work if you use exec, not shell_exec
-                                exec($command, $outputArray, $returnCode);
-
-                                // Output the results
-                                echo 'output: ' . $output . '<br>';
-                                echo 'return code: ' . $returnCode . '<br>';
+                            if (isset($_FILES["student_photo"]) && $_FILES["student_photo"]["error"] == 0) {
+                                $photo = $_FILES["student_photo"];
 
 
-                                echo "<script>
+                                $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+                                if (in_array($photo["type"], $allowedTypes)) {
+                                    $imageData = file_get_contents($photo["tmp_name"]);
+                                    $imageType = $photo["type"];
+
+                                    $sqlImage = "INSERT INTO studentsimages (student_id, image, imageType) VALUES (:student_id, :photo_blob, :imageType)";
+                                    $stmtImage = $pdo->prepare($sqlImage);
+                                    $stmtImage->bindParam(":student_id", $student_id);
+                                    $stmtImage->bindParam(":photo_blob", $imageData, PDO::PARAM_LOB);
+                                    $stmtImage->bindParam(":imageType", $imageType);
+                                    $stmtImage->execute();
+
+                                    $sqlStudent = "INSERT INTO students (student_id, full_name, major) VALUES (:student_id, :full_name, :major)";
+                                    $stmtStudent = $pdo->prepare($sqlStudent);
+                                    $stmtStudent->bindParam(":student_id", $student_id);
+                                    $stmtStudent->bindParam(":full_name", $full_name);
+                                    $stmtStudent->bindParam(":major", $major);
+                                    $stmtStudent->execute();
+
+                                    // Rename and move the uploaded file
+                                    $originalFileName = $_FILES["student_photo"]["name"];
+                                    $extension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
+                                    // Generate the filename using the student ID
+                                    $newFileName = $student_id . "." . $extension;
+
+                                    // Set the destination path for the uploaded file
+                                    $destinationPath = "../../images/" . $newFileName;
+
+                                    move_uploaded_file($_FILES["student_photo"]["tmp_name"], $destinationPath);
+
+                                    // $pythonExecutablePath = 'C:\\Path\\To\\Python\\python.exe';
+                                    $pythonExecutablePath = 'C:\\ProgramData\\anaconda3\\envs\\ManagementOfStudentAbsencesUsingFacialRecognition\\python.exe';
+                                    $pythonScriptPath = 'C:\\xampp1\\htdocs\\Management_of_student_absences_using_facial_recognition\\dist\\PHP\\test.py';
+
+                                    // Use escapeshellarg to escape the script path
+                                    $escapedScriptPath = escapeshellarg($pythonScriptPath);
+
+                                    // Use the full path to the Python interpreter and the escaped script path
+                                    $command = "{$pythonExecutablePath} {$escapedScriptPath} 2>&1";
+
+                                    // Execute the command and capture both output and return code
+                                    $output = shell_exec($command);
+                                    $returnCode = 0;  // Default return code is 0 for success
+
+                                    // If exec is used, $? will contain the return value of the executed command
+                                    // Note: This will only work if you use exec, not shell_exec
+                                    exec($command, $outputArray, $returnCode);
+
+                                    // Output the results
+                                    echo 'output: ' . $output . '<br>';
+                                    echo 'return code: ' . $returnCode . '<br>';
+
+
+                                    echo "<script>
                                         showMessage('L\'étudiant a été ajouté avec succès.', 'success');
                                         </script>";
+                                } else {
+                                    echo "<script>showMessage('Seules les images au format JPEG, PNG et GIF sont autorisées.', 'error');</script>";
+                                }
                             } else {
-                                echo "<script>showMessage('Seules les images au format JPEG, PNG et GIF sont autorisées.', 'error');</script>";
+                                echo "<script>showMessage('Veuillez sélectionner une image à télécharger.', 'error');</script>";
                             }
-                        } else {
-                            echo "<script>showMessage('Veuillez sélectionner une image à télécharger.', 'error');</script>";
                         }
                     }
                 }
@@ -260,6 +267,7 @@ if (!isset($_SESSION['email'])) {
             <script src="../JS/main.js"></script>
 
     </body>
+
     </html>
 <?php
 }

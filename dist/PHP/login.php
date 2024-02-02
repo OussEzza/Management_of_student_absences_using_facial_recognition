@@ -44,6 +44,7 @@ session_start();
                         $_SESSION['id'] = $admin['user_id'];
                         $_SESSION["username"] = $admin['user_name'];
                         $_SESSION["email"] = $admin['user_email'];
+                        $_SESSION['permission'] = $admin['permissions'];
 
                         // echo '<div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
                         // <ion-icon name="checkmark-outline" class="text-3xl"></ion-icon>
