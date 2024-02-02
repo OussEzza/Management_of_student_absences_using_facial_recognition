@@ -580,6 +580,10 @@ video {
   }
 }
 
+.static{
+  position: static;
+}
+
 .absolute{
   position: absolute;
 }
@@ -629,6 +633,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.mr-2{
+  margin-right: 0.5rem;
+}
+
 .mr-4{
   margin-right: 1rem;
 }
@@ -661,16 +669,16 @@ video {
   margin-top: 2rem;
 }
 
-.mr-2{
-  margin-right: 0.5rem;
-}
-
 .block{
   display: block;
 }
 
 .inline-block{
   display: inline-block;
+}
+
+.inline{
+  display: inline;
 }
 
 .flex{
@@ -833,13 +841,14 @@ video {
   border-radius: 0.375rem;
 }
 
-.rounded-lg{
-  border-radius: 0.5rem;
-}
-
 .rounded-b{
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
+}
+
+.rounded-b-lg{
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .rounded-t{
@@ -847,9 +856,9 @@ video {
   border-top-right-radius: 0.25rem;
 }
 
-.rounded-b-lg{
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+.rounded-t-md{
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
 }
 
 .border{
@@ -1057,6 +1066,11 @@ video {
   line-height: 1;
 }
 
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .text-sm{
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1070,11 +1084,6 @@ video {
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-lg{
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .font-bold{
@@ -1172,6 +1181,10 @@ video {
 
 .duration-500{
   transition-duration: 500ms;
+}
+
+.\[hostname\:port\]{
+  hostname: port;
 }
 
 /* .navigation {
@@ -1333,6 +1346,10 @@ video {
   .md\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .md\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1024px){
@@ -1343,6 +1360,10 @@ video {
   .lg\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .lg\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1280px){
@@ -1352,6 +1373,10 @@ video {
 
   .xl\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

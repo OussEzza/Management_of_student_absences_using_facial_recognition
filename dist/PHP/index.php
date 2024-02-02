@@ -32,7 +32,7 @@ if (!isset($_SESSION['email'])) {
                 <span class="text-5xl text-gray-800 font-semibold">TABLEAU <span class="text-blue-700">DE BORD</span></span>
             </div>
 
-            <div class="box-container p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8 ">
+            <div class="box-container p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-6 max-w-6xl mx-auto mt-8 ">
 
                 <a href="students.php" class="box border rounded-md p-8 bg-white shadow-md text-center">
                     <?php
@@ -77,20 +77,20 @@ if (!isset($_SESSION['email'])) {
 
                 $attendanceRate = ($totalPresent / $totalStudents) * 100;
                 ?>
-                <a href="Attendance.php" class="box border rounded-md p-8 bg-white shadow-md text-center">
-                    <div class="mt-6 p-6 bg-gray-100 text-gray-800 text-2xl rounded border">
-                        <p class="">Total Students:
-                            <span class="text-3xl font-bold text-blue-700">
+                <a href="Attendance.php" class="box border rounded-md p-4 bg-white shadow-md text-center block w-64 mx-auto">
+                    <div class="p-4 bg-gray-100 text-gray-800 text-lg rounded-t-md border-b">
+                        <p class="mb-2">Total Students:
+                            <span class="text-xl font-bold text-blue-700">
                                 <?php echo $totalStudents; ?>
                             </span>
                         </p>
-                        <p class="">Total Present:
-                            <span class="text-3xl font-bold text-blue-700">
+                        <p class="mb-2">Total Present:
+                            <span class="text-xl font-bold text-blue-700">
                                 <?php echo $totalPresent; ?>
                             </span>
                         </p>
                         <p class="">Attendance Rate:
-                            <span class="text-3xl font-bold text-blue-700">
+                            <span class="text-xl font-bold text-blue-700">
                                 <?php echo number_format($attendanceRate, 2); ?>%
                             </span>
                         </p>
@@ -100,6 +100,7 @@ if (!isset($_SESSION['email'])) {
                         <canvas id='attendanceChart' width='400' height='200'></canvas>
                     </div>
                 </a>
+
 
 
 
