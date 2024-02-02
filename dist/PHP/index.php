@@ -32,7 +32,7 @@ if (!isset($_SESSION['email'])) {
                 <span class="text-5xl text-gray-800 font-semibold">TABLEAU <span class="text-blue-700">DE BORD</span></span>
             </div>
 
-            <div class="box-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 max-w-6xl mx-auto mt-8 ">
+            <div class="box-container p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8 ">
 
                 <a href="students.php" class="box border rounded-md p-8 bg-white shadow-md text-center">
                     <?php
@@ -64,14 +64,7 @@ if (!isset($_SESSION['email'])) {
                     <h3 class="text-5xl font-bold text-blue-700"><?php echo $totalPresent; ?></h3>
                     <p class="mt-6 p-6 bg-gray-100 text-gray-800 text-2xl rounded border">Attendance totals</p>
                 </a>
-                <a href="#" class="box border rounded-md p-8 bg-white shadow-md text-center">
-                    <?php
-                    $select_account = mysqli_query($conn, "SELECT * FROM `attendancerecords`") or die('query failed');
-                    $number_of_attendances = mysqli_num_rows($select_account);
-                    ?>
-                    <h3 class="text-5xl font-bold text-blue-700"><?php echo $number_of_attendances; ?></h3>
-                    <p class="mt-6 p-6 bg-gray-100 text-gray-800 text-2xl rounded border">Attendance totals</p>
-                </a>
+                
 
 
                 <!-- Repeat the box structure for additional items -->

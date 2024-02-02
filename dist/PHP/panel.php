@@ -89,7 +89,7 @@
                 </li>
 
                 <li class="mb-2 item">
-                    <a href="#" class="">
+                    <a href="logout.php" class="">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
@@ -107,7 +107,16 @@
                 </div>
 
                 <div class="admin w-14 h-14 overflow-hidden rounded-full cursor-pointer">
-                    <img src="../pictures/student5651.jpg" alt="profile picture" class="w-full h-full object-cover">
+                    <?php
+                    session_start();
+                    $user_id = $_SESSION['id'];
+                    require_once('config.php');
+                    $sql = "SELECT * FROM admins WHERE user_id = '$user_id'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc()                    
+                    ?>
+                    <img src="data:<?= $row['TypeImage'] ?>;base64,<?= base64_encode($row['profile_picture']) ?>" alt="Profile Picture" class="w-full h-full object-cover">
+                    <!-- <img src="../pictures/student5651.jpg" alt="profile picture" class="w-full h-full object-cover"> -->
                 </div>
             </div>
 
