@@ -151,10 +151,10 @@ use PHPMailer\PHPMailer\Exception;
             // Compare security code from URL with the one in the database
             if ($_GET['code'] === $user->security_code) {
                 // Check if the link is expired (e.g., set expiration to 1 hour)
-                $expirationTime = strtotime($user->security_code_timestamp) + 3600; // 1 hour
-                $currentTime = time();
+                $expirationTimestamp = strtotime($user->security_code_timestamp) + 3600; // 1 hour
+                $currentTimestamp = strtotime("now");
 
-                if ($currentTime <= $expirationTime) {
+                if ($currentTimestamp <= $expirationTimestamp) {
                     require_once('config.php');
                     $new_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -170,16 +170,22 @@ use PHPMailer\PHPMailer\Exception;
                     echo '
                             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
                                 <strong class="font-bold">Error!</strong>
-                                <span class="block sm:inline">The password reset link has expired.</span>
+                                <span class="block sm:inline">The password reset link has expired. Go to get new link!</span>
                             </div>
+                            <a href="rest_pass.php" class="inline-block transition duration-300 text-blue-600 ease-in-out transform hover:scale-105 focus:outline-none focus:underline">
+                                    Get new link?
+                            </a>
                         ';
                 }
             } else {
                 echo '
                             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
                                 <strong class="font-bold">Error!</strong>
-                                <span class="block sm:inline">Invalid security code.</span>
-                            </div>
+                                <span class="block sm:inline">Invalid security code. Go to get new link with new code !</span>
+                                </div>
+                                <a href="rest_pass.php" class="inline-block transition duration-300 text-blue-600 ease-in-out transform hover:scale-105 focus:outline-none focus:underline">
+                                    Get new link?
+                                </a>
                         ';
             }
         }
