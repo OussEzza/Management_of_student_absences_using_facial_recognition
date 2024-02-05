@@ -24,14 +24,15 @@ try:
     # mycursor.execute('SET GLOBAL max_allowed_packet=67108864')
 
     folderPath = 'Images'
+    # folderPath = './images'
     pathList = os.listdir(folderPath)
     imgList = []
     studentIds = []
 
     # Insertion des images dans la base de données MySQL
-    # for path in pathList:
-    #     img = cv2.imread(os.path.join(folderPath, path))
-    #     student_id = os.path.splitext(path)[0]
+    for path in pathList:
+        img = cv2.imread(os.path.join(folderPath, path))
+        student_id = os.path.splitext(path)[0]
 
     #     # Insertion des données dans la base de données MySQL
     #     sql = "INSERT INTO studentsimages (student_id, image) VALUES (%s, %s)"
@@ -41,8 +42,8 @@ try:
     #     # Valider les changements dans la base de données
     #     mydb.commit()
 
-    #     imgList.append(img)
-    #     studentIds.append(student_id)
+        imgList.append(img)
+        studentIds.append(student_id)
 
     # print(studentIds)
 

@@ -6,6 +6,7 @@ import numpy as np
 import mysql.connector
 import cvzone
 from datetime import datetime
+import base64
 
 # Connexion à la base de données MySQL
 mydb = mysql.connector.connect(
@@ -37,9 +38,9 @@ encodeListKnownWithIds = pickle.load(file)
 file.close()
 encodeListKnown, studentIds = encodeListKnownWithIds
 
-# print("encodeListKnownWithIds : ",encodeListKnownWithIds)
-# print("encodeListKnown : ",encodeListKnown)
-# print("studentIds : ",studentIds)
+print("encodeListKnownWithIds : ",encodeListKnownWithIds)
+print("encodeListKnown : ",encodeListKnown)
+print("studentIds : ",studentIds)
 print("Encode File Loaded")
 
 modeType = 0
@@ -83,27 +84,39 @@ while True:
         if counter != 0:
             if counter == 1:
                 # Get the Data 
-                sql = f"SELECT * FROM Students WHERE student_id = '{id}'"
-                mycursor.execute(sql)
+                print("Student ID:", id)
+                sql = f"SELECT * FROM students WHERE student_id = '{id}'"
+                if mycursor.execute(sql):
+                    print("Resultat obtenu !")
                 studentInfo = mycursor.fetchone()
+                print(studentInfo)
 
                 # Update attendance 
-                datetimeObject = studentInfo[6]  # Assuming 'last_attendance_time' is the 8th column
+                # datetimeObject = studentInfo[6]  # Assuming 'last_attendance_time' is the 8th column
+                datetimeObject = studentInfo[5]
+                
+
                 secondElapsed = (datetime.now() - datetimeObject).total_seconds()
                 print(secondElapsed)
 
                 if secondElapsed > 30:
-                    sql_Update = f"UPDATE Students SET total_attendance = total_attendance + 1, last_attendance_time = '{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}' WHERE student_id = '{id}'"
+                    sql_Update = f"UPDATE students SET total_attendance = total_attendance + 1, last_attendance_time = '{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}' WHERE student_id = '{id}'"
                     mycursor.execute(sql_Update)
+
                     # Calculer le numéro de semaine
                     week_number = datetime.now().strftime('%U')
                     # Jour de la semaine (lundi = 0, dimanche = 6)
                     day_of_week = datetime.now().weekday() + 1
 
-                    sql_insert_attendance = "INSERT INTO AttendanceRecords (student_id, class_id, date_time, week_number, day_of_week, present) VALUES (%s, %s, %s, %s, %s, %s)"
-                    values = (id, studentInfo[3], datetime.now(), week_number, day_of_week, 1)
-                    mycursor.execute(sql_insert_attendance, values)
-                    mydb.commit()
+                    sql_insert_attendance = "INSERT INTO attendancerecords (student_id, date_time, week_number, day_of_week, present) VALUES (%s, %s, %s, %s, %s)"
+                    values = (id, datetime.now(), week_number, day_of_week, 1)
+
+                    try:
+                        mycursor.execute(sql_insert_attendance, values)
+                        mydb.commit()
+                    except mysql.connector.Error as err:
+                        print(f"Error: {err}")
+
                 else:
                     modeType = 3
                     counter = 0
@@ -123,7 +136,7 @@ while True:
                                 cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
                     cv2.putText(imgBackground, str(studentInfo[3]), (910, 625),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
-                    cv2.putText(imgBackground, str(studentInfo[6]), (1025, 625),
+                    cv2.putText(imgBackground, str(studentInfo[5]), (1025, 625),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
                     cv2.putText(imgBackground, str(studentInfo[4]), (1125, 625),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
@@ -134,15 +147,27 @@ while True:
 
                     
                     # Load student image from database
-                    sql_image = f"SELECT * FROM StudentsImages WHERE student_id = '{id}'"
+                    sql_image = f"SELECT * FROM studentsimages WHERE student_id = '{id}'"
                     mycursor.execute(sql_image)
                     studentImageInfo = mycursor.fetchone()
 
+                    # if studentImageInfo:
+                    #     # Assuming studentImageInfo[2] contains the base64-encoded image data
+                    #     # decoded_image = base64.b64decode(studentImageInfo[2])
+                    #     # imgStudent = cv2.imdecode(np.frombuffer(decoded_image, np.uint8), -1)
+                    #     imgStudent = studentImageInfo[2]
+                    #     # imgStudent = pickle.loads(studentImageInfo[2])
+                    #     # Resize imgStudent to match the region size
+                    #     imgStudent = cv2.resize(imgStudent, (216, 216))
+                    #     imgBackground[175:175+216, 909:909+216] = imgStudent
                     if studentImageInfo:
-                        imgStudent = pickle.loads(studentImageInfo[2])
+                        imgStudent = studentImageInfo[2]
+                        # Convert to numpy array
+                        imgStudent_np = np.frombuffer(imgStudent, dtype=np.uint8)
+                        imgStudent = cv2.imdecode(imgStudent_np, -1)
                         # Resize imgStudent to match the region size
-                        imgStudent = cv2.resize(imgStudent, (216, 216))
-                        imgBackground[175:175+216, 909:909+216] = imgStudent
+                        imgStudent_resized = cv2.resize(imgStudent, (216, 216))
+                        imgBackground[175:175+216, 909:909+216] = imgStudent_resized
 
 
             counter += 1

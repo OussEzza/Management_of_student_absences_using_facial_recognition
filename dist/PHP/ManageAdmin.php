@@ -32,12 +32,12 @@ if (!isset($_SESSION['email'])) {
         ?>
 
         <div class=" flex items-center justify-center">
-            <div class="bg-white p-8 rounded shadow-md max-w-5xl">
+            <div class="bg-white p-8 rounded shadow-md max-w-5xl mb-5">
 
                 <h2 class="text-2xl text-center font-semibold mb-6">Liste des administrateurs</h2>
 
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-full mb-8">
+                    <table class="table-auto w-full">
                         <thead>
                             <tr>
                                 <th class="px-4 py-2">#</th>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['email'])) {
 
 
         <div class="min-h-screen flex items-center justify-center">
-            <div class="bg-white p-8 rounded shadow-md max-w-md w-full">
+            <div class="bg-white p-8 rounded shadow-md max-w-md w-full mt-5">
 
                 <h2 class="text-2xl font-semibold mb-6">Add admin</h2>
 
