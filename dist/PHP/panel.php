@@ -28,6 +28,7 @@
                 </li>
 
 
+
                 <li class="mb-2 item">
                     <a href="index.php" class="">
                         <span class="icon">
@@ -37,7 +38,7 @@
                     </a>
                 </li>
 
-                <!-- Main Menu Item -->
+
                 <li class="mb-2 item main-menu relative group">
                     <a href="students.php" class="flex items-center">
                         <span class="icon">
@@ -45,19 +46,7 @@
                         </span>
                         <span class="title">Students</span>
                     </a>
-                    <!-- Submenus for Students -->
-                    <div class="submenu-container absolute bg-white text-gray-800 shadow-md z-10 right-0 mt-2">
-                        <ul class="submenu">
-                            <li class="subitem">
-                                <a href="students-list.php" class="block px-4 py-2">Student List</a>
-                            </li>
-                            <li class="subitem">
-                                <a href="add-student.php" class="block px-4 py-2">Add Student</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
-
 
 
 
@@ -102,7 +91,7 @@
 
         <div class="main flex-1 flex flex-col overflow-hidden transition-all duration-500 bg-white">
             <div class="topbar w-full h-16 flex items-center justify-between bg-white p-4">
-                <div class="toggle text-gray-800 cursor-pointer">
+                <div class="toggle text-gray-800 cursor-pointer z-50">
                     <ion-icon name="menu-outline" class="text-3xl"></ion-icon>
                 </div>
 
@@ -113,7 +102,7 @@
                     require_once('config.php');
                     $sql = "SELECT * FROM admins WHERE user_id = '$user_id'";
                     $result = $conn->query($sql);
-                    $row = $result->fetch_assoc()                    
+                    $row = $result->fetch_assoc();
                     ?>
                     <img src="data:<?= $row['TypeImage'] ?>;base64,<?= base64_encode($row['profile_picture']) ?>" alt="Profile Picture" class="w-full h-full object-cover">
                     <!-- <img src="../pictures/student5651.jpg" alt="profile picture" class="w-full h-full object-cover"> -->
@@ -125,6 +114,7 @@
             <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
             <script src="../JS/main.js"></script>
+
 </body>
 
 </html>

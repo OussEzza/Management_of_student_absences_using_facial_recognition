@@ -26,7 +26,8 @@ if (!isset($_SESSION['email'])) {
         <?php
         require_once('panel.php');
         ?>
-
+        <div class="absolute z-10 bg-white border border-gray-200 shadow-md rounded-md" id="dropdownContent">
+        </div>
 
         <?php
         require_once('config.php');
@@ -261,6 +262,40 @@ if (!isset($_SESSION['email'])) {
                     var messageDiv = document.getElementById('message');
                     messageDiv.style.display = 'none';
                 }
+
+
+                // JavaScript to dynamically create dropdown
+                // document.addEventListener('DOMContentLoaded', function() {
+                //     var toggleButton = document.getElementById('toggleButton');
+                //     var dropdownContent = document.getElementById('dropdownContent');
+
+                //     // Create anchor elements
+                //     var option1 = document.createElement('a');
+                //     option1.href = 'students_option1.php';
+                //     option1.className = 'block px-4 py-2 text-gray-800 hover:bg-gray-200';
+                //     option1.textContent = 'Option 1';
+
+                //     var option2 = document.createElement('a');
+                //     option2.href = 'students_option2.php';
+                //     option2.className = 'block px-4 py-2 text-gray-800 hover:bg-gray-200';
+                //     option2.textContent = 'Option 2';
+
+                //     // Append anchor elements to the dropdown content
+                //     dropdownContent.appendChild(option1);
+                //     dropdownContent.appendChild(option2);
+
+                //     // Event listener for dropdown toggle
+                //     toggleButton.addEventListener('click', function() {
+                //         dropdownContent.classList.toggle('hidden');
+                //     });
+
+                //     // Close dropdown when clicking outside
+                //     document.addEventListener('click', function(event) {
+                //         if (!toggleButton.contains(event.target)) {
+                //             dropdownContent.classList.add('hidden');
+                //         }
+                //     });
+                // });
             </script>
 
 

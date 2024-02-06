@@ -82,7 +82,12 @@ if (!isset($_SESSION['email'])) {
 
                     $queryStudent = "SELECT student_id FROM students WHERE full_name LIKE '%$searchInput%'";
                     $resultStudent = $conn->query($queryStudent);
-                    $StudentId = $resultStudent->fetch_assoc();
+                    if ($resultStudent->num_rows > 0) {
+                        $studentData = $resultStudent->fetch_assoc();
+                        $StudentId = $studentData['student_id'];
+                    } else {
+                        $StudentId = null;
+                    }
 
                     // Utilise les valeurs des filtres pour récupérer les relevés de présence
                     $query = "SELECT * FROM attendancerecords WHERE date_time LIKe '%$dateFilter%' AND student_id LIKE '%$StudentId%'";
