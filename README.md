@@ -18,10 +18,27 @@ This project is a student attendance management system that utilizes facial reco
   - Implement security features such as authentication and authorization.
 
 ## Technologies Used
-- Python for development
-- OpenCV and dlib for facial recognition
-- Tkinter for the graphical user interface
-- MySQL for database management
+- **Python for development:**
+  - Utilized for the overall application logic.
+- **OpenCV and dlib for facial recognition:**
+  - Implemented facial recognition features for user authentication.
+- **MySQL for database management:**
+  - Used for storing and managing student information and attendance records.
+- **Web Development Technologies for Admin Interface:**
+  - **Frontend:**
+    - HTML, CSS
+    - [Tailwind CSS](https://tailwindcss.com/) for styling
+    - [JavaScript](https://js.org/) for dynamic user interfaces
+  - **Backend:**
+    - PHP for server-side logic
+- **Other Dependencies:**
+  - Dependencies specific to Python, OpenCV, and other libraries are listed in `requirements.txt`.
+
+## Setup
+1. Clone the repository: `git clone https://github.com/OussEzza/Management_of_student_absences_using_facial_recognition.git`
+2. Install the required dependencies: `pip install -r requirements.txt`
+3. Configure the database connection.
+4. Set up the admin interface (instructions for frontend and PHP backend setup).
 
 ## Setup
 1. Clone the repository: `git clone https://github.com/OussEzza/Management_of_student_absences_using_facial_recognition.git`
@@ -41,7 +58,7 @@ If you would like to contribute to the project, please follow these steps:
 This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
-For inquiries or support, please contact Oussama Ezzaki at [your.email@example.com].
+For inquiries or support, please contact Oussama EZZAHRI at [ezzahrioussama01@gmail.com].
 
 ---
 
