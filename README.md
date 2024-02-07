@@ -9,10 +9,9 @@ This project is a student attendance management system that utilizes facial reco
 
 - **Administrator Interface:**
   - Select and view attendance records for a specific date.
-  - Manage student applications, approve or reject them, and store new student information.
+  - Manage student and store new student information.
   - View attendance statistics, including the total number of students present and average attendance rate.
-  - Filter attendance records based on various criteria such as department, program of study, etc.
-  - Search for specific information quickly.
+  - Filter attendance records based on various criteria such as name, etc.
   - Export attendance records to a file (e.g., CSV).
   - Manage user accounts, including adding and removing accounts.
   - Implement security features such as authentication and authorization.
