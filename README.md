@@ -18,7 +18,7 @@ This project is a student attendance management system that utilizes facial reco
 
 ## Technologies Used
 - **Python for development:**
-  - Utilized for the overall application logic.
+  - Utilized for the overall application logic (version 3.7).
 - **OpenCV and dlib for facial recognition:**
   - Implemented facial recognition features for user authentication.
 - **MySQL for database management:**
@@ -35,6 +35,8 @@ This project is a student attendance management system that utilizes facial reco
 
 ## Setup
 1. Clone the repository: `git clone https://github.com/OussEzza/Management_of_student_absences_using_facial_recognition.git`
+2. Install the face_recognition_models dependencies: `pip install .\Install-dlib-main\dlib-19.19.0-cp37-cp37m-win_amd64.whl`
+2. Install the face_recognition_models dependencies: `pip install .\face_recognition_models-master\face_recognition_models`
 2. Install the required dependencies: `pip install -r requirements.txt`
 3. Configure the database connection.
 4. Set up the admin interface (instructions for frontend and PHP backend setup).
