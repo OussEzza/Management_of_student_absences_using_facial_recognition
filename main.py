@@ -63,7 +63,10 @@ while True:
     encodeCurFrame = face_recognition.face_encodings(imgS, faceCurFrame)
 
     imgBackground[162:162+480, 55:55+640] = img
-    imgBackground[44:44 + 633, 808:808+414] = imgModeList[modeType]
+    # Assurez-vous que les dimensions correspondent exactement
+    imgBackground[44:44 + imgModeList[modeType].shape[0], 808:808 + imgModeList[modeType].shape[1]] = imgModeList[modeType]
+
+    # imgBackground[44:44 + 634, 808:808+416] = imgModeList[modeType]
 
     if faceCurFrame:
         for encodeFace, faceLoc in zip(encodeCurFrame, faceCurFrame):
@@ -120,12 +123,18 @@ while True:
                 else:
                     modeType = 3
                     counter = 0
-                    imgBackground[44:44 + 633, 808:808+414] = imgModeList[modeType]
+                    # Assurez-vous que les dimensions correspondent exactement
+                    imgBackground[44:44 + imgModeList[modeType].shape[0], 808:808 + imgModeList[modeType].shape[1]] = imgModeList[modeType]
+
+                    # imgBackground[44:44 + 633, 808:808+414] = imgModeList[modeType]
 
             if modeType != 3: 
                 if 10 < counter < 20: 
                     modeType = 2
-                imgBackground[44:44 + 633, 808:808+414] = imgModeList[modeType]
+                # imgBackground[44:44 + 634, 808:808+416] = imgModeList[modeType]
+                # Assurez-vous que les dimensions correspondent exactement
+                imgBackground[44:44 + imgModeList[modeType].shape[0], 808:808 + imgModeList[modeType].shape[1]] = imgModeList[modeType]
+
 
                 if counter <= 10:
                     cv2.putText(imgBackground, str(studentInfo[5]), (861, 125),
@@ -177,7 +186,10 @@ while True:
                 modeType = 0 
                 studentInfo = []
                 imgStudent = []
-                imgBackground[44:44 + 633, 808:808+414] = imgModeList[modeType]
+                # Assurez-vous que les dimensions correspondent exactement
+                imgBackground[44:44 + imgModeList[modeType].shape[0], 808:808 + imgModeList[modeType].shape[1]] = imgModeList[modeType]
+
+                # imgBackground[44:44 + 633, 808:808+414] = imgModeList[modeType]
     else:
         modeType = 0 
         counter = 0
