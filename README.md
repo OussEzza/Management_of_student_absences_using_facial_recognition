@@ -39,12 +39,6 @@ This project is a student attendance management system that utilizes facial reco
 3. Configure the database connection.
 4. Set up the admin interface (instructions for frontend and PHP backend setup).
 
-## Setup
-1. Clone the repository: `git clone https://github.com/OussEzza/Management_of_student_absences_using_facial_recognition.git`
-2. Install the required dependencies: `pip install -r requirements.txt`
-3. Configure the database connection in `config.py`.
-4. Run the application: `python main.py`
-
 ## Contribution
 If you would like to contribute to the project, please follow these steps:
 1. Fork the repository.
