@@ -201,8 +201,10 @@ if (!isset($_SESSION['email'])) {
                                     move_uploaded_file($_FILES["student_photo"]["tmp_name"], $destinationPath);
 
                                     // $pythonExecutablePath = 'C:\\Path\\To\\Python\\python.exe';
-                                    $pythonExecutablePath = 'C:\\ProgramData\\anaconda3\\envs\\ManagementOfStudentAbsencesUsingFacialRecognition\\python.exe';
-                                    $pythonScriptPath = 'C:\\xampp1\\htdocs\\Management_of_student_absences_using_facial_recognition\\dist\\PHP\\test.py';
+                                    // $pythonExecutablePath = 'C:\\ProgramData\\anaconda3\\envs\\ManagementOfStudentAbsencesUsingFacialRecognition\\python.exe';
+                                    $pythonExecutablePath = 'C:\\Windows\\System32\\python.exe';
+                                    $pythonScriptPath = 'C:\\xampp1\\htdocs\\Management_of_student_absences_using_facial_recognition\\Encodeimg.py';
+                                    // $pythonScriptPath = 'C:\\xampp1\\htdocs\\Management_of_student_absences_using_facial_recognition\\dist\\PHP\\test.py';
 
                                     // Use escapeshellarg to escape the script path
                                     $escapedScriptPath = escapeshellarg($pythonScriptPath);
