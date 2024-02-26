@@ -101,7 +101,7 @@ use PHPMailer\PHPMailer\Exception;
                         )
                     );
                     $mail->Username   = 'ezzahriraja@gmail.com';
-                    $mail->Password   = 'gqrombpjvedezmqv';
+                    $mail->Password   = 'your_pass';
                     $mail->SMTPSecure = 'ssl';
                     $mail->Port       = 465;    // Update port accordingly
 
