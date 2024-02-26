@@ -119,22 +119,22 @@ if (!isset($_SESSION['email'])) {
                 <!-- Formulaire pour ajouter un étudiant -->
                 <h1 class="text-center text-5xl font-bold text-indigo-600 mb-8 mt-8">Add Student</h1>
                 <form action="" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
-                    <label for="student_id" class="block text-sm font-medium text-gray-600">ID de l'étudiant :</label>
+                    <label for="student_id" class="block text-sm font-medium text-gray-600">Student ID :</label>
                     <input type="text" name="student_id" id="student_id" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
 
-                    <label for="full_name" class="block mt-4 text-sm font-medium text-gray-600">Nom complet :</label>
+                    <label for="full_name" class="block mt-4 text-sm font-medium text-gray-600">Full Name :</label>
                     <input type="text" name="full_name" id="full_name" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
 
-                    <label for="major" class="block mt-4 text-sm font-medium text-gray-600">Spécialité :</label>
+                    <label for="major" class="block mt-4 text-sm font-medium text-gray-600">Speciality :</label>
                     <input type="text" name="major" id="major" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
 
                     <!-- <label for="classe_name" class="block mt-4 text-sm font-medium text-gray-600">Nom de la classe :</label>
                 <input type="text" name="classe_name" id="classe_name" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500"> -->
 
-                    <label for="student_photo" class="block mt-4 text-sm font-medium text-gray-600">Choisir une photo :</label>
+                    <label for="student_photo" class="block mt-4 text-sm font-medium text-gray-600">Student picture :</label>
                     <input type="file" name="student_photo" id="student_photo" required class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:border-indigo-500">
 
-                    <input type="submit" name="add_student" value="Ajouter l'étudiant" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md cursor-pointer hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                    <input type="submit" name="add_student" value="Add student" class="mt-4 px-4 py-2 bg-indigo-500 text-white rounded-md cursor-pointer hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
                 </form>
 
 

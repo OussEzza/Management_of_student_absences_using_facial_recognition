@@ -32,7 +32,7 @@ if (!isset($_SESSION['email'])) {
         ?>
 
         <div class=" flex items-center justify-center">
-            <div class="bg-white p-8 rounded shadow-md max-w-5xl mb-5">
+            <div class="bg-white p-8 rounded shadow-md max-w-5xl">
 
                 <h2 class="text-2xl text-center font-semibold mb-6">Liste des administrateurs</h2>
 
@@ -41,10 +41,10 @@ if (!isset($_SESSION['email'])) {
                         <thead>
                             <tr>
                                 <th class="px-4 py-2">#</th>
-                                <th class="px-4 py-2">Photo de profil</th>
-                                <th class="px-4 py-2">Nom complet</th>
-                                <th class="px-4 py-2">Nom d'utilisateur</th>
-                                <th class="px-4 py-2">Adresse e-mail</th>
+                                <th class="px-4 py-2">Profile picture</th>
+                                <th class="px-4 py-2">Full Name</th>
+                                <th class="px-4 py-2">Username</th>
+                                <th class="px-4 py-2">Email address</th>
                                 <th class="px-4 py-2">Actions</th>
                             </tr>
                         </thead>
@@ -75,35 +75,35 @@ if (!isset($_SESSION['email'])) {
 
 
         <div class="min-h-screen flex items-center justify-center">
-            <div class="bg-white p-8 rounded shadow-md max-w-md w-full mt-5">
+            <div class="bg-white p-8 rounded shadow-md max-w-md w-full ">
 
                 <h2 class="text-2xl font-semibold mb-6">Add admin</h2>
 
                 <form action="" method="POST" enctype="multipart/form-data">
 
                     <div class="mb-4">
-                        <label for="picture_profile" class="block text-gray-700 text-sm font-medium mb-2">Photo de profil</label>
+                        <label for="picture_profile" class="block text-gray-700 text-sm font-medium mb-2">Profile picture</label>
                         <input type="file" id="picture_profile" name="picture_profile" required class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                     </div>
 
                     <div class="mb-4">
-                        <label for="full_name" class="block text-gray-700 text-sm font-medium mb-2">Nom complet</label>
+                        <label for="full_name" class="block text-gray-700 text-sm font-medium mb-2">Full Name :</label>
                         <input type="text" id="full_name" name="full_name" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                     </div>
 
                     <div class="mb-4">
-                        <label for="user_name" class="block text-gray-700 text-sm font-medium mb-2">Nom d'utilisateur</label>
+                        <label for="user_name" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
                         <input type="text" id="user_name" name="user_name" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black">
                     </div>
 
                     <div class="mb-4">
-                        <label for="user_email" class="block text-gray-700 text-sm font-medium mb-2">Adresse e-mail</label>
+                        <label for="user_email" class="block text-gray-700 text-sm font-medium mb-2">Email address</label>
                         <input type="email" id="user_email" name="user_email" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validateEmail()" required>
-                        <p id="emailValidationError" class="text-red-500 hidden">Adresse e-mail invalide.</p>
+                        <p id="emailValidationError" class="text-red-500 hidden">Invalid email address.</p>
                     </div>
 
                     <div class="mb-4">
-                        <label for="admin_permission" class="block text-gray-700 text-sm font-medium mb-2">Type de permission d'admin</label>
+                        <label for="admin_permission" class="block text-gray-700 text-sm font-medium mb-2">Admin permission type</label>
                         <select id="admin_permission" name="admin_permission" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" required>
                             <option value="3">Super Admin</option>
                             <option value="2">Admin</option>
@@ -111,7 +111,7 @@ if (!isset($_SESSION['email'])) {
                         </select>
                     </div>
 
-                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Mot de passe</label>
+                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
                     <div class="mb-6 flex items-center">
                         <div class="relative w-full">
                             <input type="password" id="password" name="password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validatePasswords()" required>
@@ -121,20 +121,20 @@ if (!isset($_SESSION['email'])) {
                         </div>
                     </div>
 
-                    <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirmer le mot de passe</label>
+                    <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirm password</label>
                     <div class="mb-6 flex items-center">
                         <div class="relative w-full">
                             <input type="password" id="confirm_password" name="confirm_password" class="w-full px-4 py-2 border-b rounded-md focus:outline-none focus:border-black" oninput="validatePasswords()" required>
                             <button type="button" id="togglePasswordConfirm" class="absolute right-0 top-0 mt-3 mr-4 text-2xl text-gray-600 cursor-pointer">
                                 <ion-icon name="eye-off-outline"></ion-icon>
                             </button>
-                            <p id="passwordMatchError" class="text-red-500 hidden">Les deux mots de passe ne correspondent pas.</p>
+                            <p id="passwordMatchError" class="text-red-500 hidden">The two passwords do not match.</p>
                         </div>
                     </div>
 
 
                     <button type="submit" class="w-full bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-900 focus:outline-none focus:shadow-outline-blue">
-                        S'inscrire
+                        Add admin
                     </button>
                 </form>
             </div>

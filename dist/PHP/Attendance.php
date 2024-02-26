@@ -144,7 +144,6 @@ if (!isset($_SESSION['email'])) {
 
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                         <script>
-                            // Exemple de code pour initialiser un graphique avec Chart.js
                             var ctx = document.getElementById('attendanceChart').getContext('2d');
                             var myChart = new Chart(ctx, {
                                 type: 'bar',
