@@ -137,18 +137,18 @@ while True:
 
 
                 if counter <= 10:
-                    cv2.putText(imgBackground, str(studentInfo[5]), (861, 125),
+                    cv2.putText(imgBackground, str(studentInfo[4]), (861, 125),
                                 cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
                     cv2.putText(imgBackground, str(studentInfo[1]), (1006, 550),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
                     cv2.putText(imgBackground, str(id), (1006, 493),
                                 cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 255, 255), 1)
-                    cv2.putText(imgBackground, str(studentInfo[3]), (910, 625),
-                                cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
-                    cv2.putText(imgBackground, str(studentInfo[5]), (1025, 625),
-                                cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
-                    cv2.putText(imgBackground, str(studentInfo[4]), (1125, 625),
-                                cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
+                    # cv2.putText(imgBackground, str(studentInfo[3]), (910, 625),
+                    #             cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
+                    # cv2.putText(imgBackground, str(studentInfo[5]), (1025, 625),
+                    #             cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
+                    # cv2.putText(imgBackground, str(studentInfo[4]), (1125, 625),
+                    #             cv2.FONT_HERSHEY_COMPLEX, 0.6, (100, 100, 100), 1)
                     (w, h), _ = cv2.getTextSize(studentInfo[1], cv2.FONT_HERSHEY_COMPLEX, 1, 1)
                     offset = (414-w)//2
                     cv2.putText(imgBackground, str(studentInfo[2]), (808+offset, 445),

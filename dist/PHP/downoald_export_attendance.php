@@ -14,10 +14,13 @@ if (!isset($_SESSION['email'])) {
     $result = $conn->query($query);
 
     $csvFile = fopen('attendance_export.csv', 'w');
-    fputcsv($csvFile, array('Student Name', 'Time In', 'Time Out'));
+    fputcsv($csvFile, array('Student ID, Student Name', 'Time Attendance', 'Total Attendance'));
 
     while ($row = $result->fetch_assoc()) {
-        fputcsv($csvFile, array($row['student_id'], $row['date_time'], $row['present']));
+        $queryStudents = "SELECT * FROM students WHERE student_id = '" . $row['student_id'] . "'";
+        $resultStudents = $conn->query($queryStudents);
+        $rowStudents = $resultStudents->fetch_assoc();
+        fputcsv($csvFile, array($rowStudents['student_id'], $rowStudents['full_name'], $row['date_time'], $rowStudents['total_attendance']));
     }
 
     fclose($csvFile);

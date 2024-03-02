@@ -75,7 +75,7 @@ if (!isset($_SESSION['email'])) {
 
 
         <div class="min-h-screen flex items-center justify-center">
-            <div class="bg-white p-8 rounded shadow-md max-w-md w-full ">
+            <div class="bg-white p-8 rounded shadow-md max-w-md w-full mt-5">
 
                 <h2 class="text-2xl font-semibold mb-6">Add admin</h2>
 
